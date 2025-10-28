@@ -58,6 +58,12 @@ bash reset.sh
 
 Run each step directly with Node — **in this order**. After each command I’ve listed exact **Reads** and **Writes** so I know what files to expect.
 
+PREREQUISITE: Activate key
+
+````
+source ~/.zshrc
+```
+
 1. **Build feed list from OPML**
 
 ```bash
