@@ -75,9 +75,18 @@
 
     <outline text="Google News — Topic Alerts" title="Google News — Topic Alerts">
       <outline type="rss" text="Wearables Privacy" xmlUrl="https://news.google.com/rss/search?q=wearables+privacy"/>
+      <outline type="rss" text="AI Data Privacy" xmlUrl="https://news.google.com/rss/search?q=AI+data+privacy"/>
+      <outline type="rss" text="AI Europe Privacy" xmlUrl="https://news.google.com/rss/search?q=AI+Europe+privacy"/>
+      <outline type="rss" text="Europe Grants Privacy" xmlUrl="https://news.google.com/rss/search?q=Europe+grants+privacy"/>
       <outline type="rss" text="Public Benefit Corporation" xmlUrl="https://news.google.com/rss/search?q=public+benefit+corporation"/>
       <outline type="rss" text="Employee Ownership Trust" xmlUrl="https://news.google.com/rss/search?q=employee+ownership+trust"/>
       <outline type="rss" text="Longevity Women Health" xmlUrl="https://news.google.com/rss/search?q=longevity+women+health"/>
+      <outline type="rss" text="Jen Gunter" xmlUrl="https://news.google.com/rss/search?q=Jen+Gunter"/>
+      <outline type="rss" text="Vonda Wright" xmlUrl="https://news.google.com/rss/search?q=Vonda+Wright"/>
+      <outline type="rss" text="Elissa Eppel" xmlUrl="https://news.google.com/rss/search?q=Elissa+Epel"/>
+      <outline type="rss" text="Elizabeth Nelson" xmlUrl="https://news.google.com/rss/search?q=Elizabeth+Nelson"/>
+      <outline type="rss" text="Theresa Moloney" xmlUrl="https://news.google.com/rss/search?q=Theresa+Moloney"/>
+
     </outline>
 
     <outline text="Journalist Callouts" title="Journalist Callouts">
