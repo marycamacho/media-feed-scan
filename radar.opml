@@ -5,62 +5,43 @@
     <dateCreated>Sun, 06 Oct 2025 22:45:00 +0000</dateCreated>
   </head>
   <body>
-
+    
     <outline text="Target Outlets" title="Target Outlets">
       <outline type="rss" text="FastCompany — All" xmlUrl="https://www.fastcompany.com/rss"/>
       <outline type="rss" text="FastCompany — Technology" xmlUrl="https://www.fastcompany.com/technology/rss"/>
       <outline type="rss" text="FastCompany — Work Life / Wellness" xmlUrl="https://www.fastcompany.com/work-life/rss"/>
       <outline type="rss" text="Inc. — All" xmlUrl="https://www.inc.com/rss"/>
-      <outline type="rss" text="Inc. — Leadership" xmlUrl="https://www.inc.com/leadership/rss"/>
-      <outline type="rss" text="Inc. — Startups" xmlUrl="https://www.inc.com/startup/rss"/>
       <outline type="rss" text="Entrepreneur — Latest" xmlUrl="https://www.entrepreneur.com/latest.rss"/>
       <outline type="rss" text="Entrepreneur — Leadership" xmlUrl="https://www.entrepreneur.com/leadership.rss"/>
       <outline type="rss" text="Entrepreneur — Business News" xmlUrl="https://www.entrepreneur.com/topic/business-news.rss"/>
       <outline type="rss" text="TechCrunch — Main" xmlUrl="http://feeds.feedburner.com/TechCrunch/"/>
-      <outline type="rss" text="TechCrunch — HealthTech" xmlUrl="http://feeds.feedburner.com/TechCrunch/healthtech"/>
       <outline type="rss" text="Forbes — Innovation" xmlUrl="https://www.forbes.com/innovation/feed/"/>
-      <outline type="rss" text="Forbes — Leadership" xmlUrl="https://www.forbes.com/leadership/feed/"/>
-      <outline type="rss" text="Forbes — Small Business" xmlUrl="https://www.forbes.com/small-business/feed/"/>
       <outline type="rss" text="FemTech Insider — Main" xmlUrl="https://femtechinsider.com/feed/"/>
       <outline type="rss" text="New Scientist - Health" xmlUrl="https://www.newscientist.com/subject/health/feed/"/>      
     </outline>
 
     <outline text="Journalists & Authors" title="Journalists & Authors">
-      <outline type="rss" text="Christine Yu — Substack" xmlUrl="https://christineyu.substack.com/feed"/>
       <outline type="rss" text="Amanda Rees — Medium" xmlUrl="https://medium.com/feed/@amandarees"/>
-      <outline type="rss" text="Natalie Shure — Medium" xmlUrl="https://medium.com/feed/@natalieshure"/>
       <outline type="rss" text="Casey Newton — Platformer" xmlUrl="https://www.platformer.news/feed"/>
       <outline type="rss" text="Kashmir Hill — Medium syndication" xmlUrl="https://medium.com/feed/@kashmirhill"/>
       <outline type="rss" text="Natasha Singer — NYT Tech" xmlUrl="https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"/>
       <outline type="rss" text="Maria Ressa — Medium" xmlUrl="https://medium.com/feed/@mariaressa"/>
-      <outline type="rss" text="Laura Deming — Medium" xmlUrl="https://medium.com/feed/@laurademing"/>
-      <outline type="rss" text="Andrew J. Scott — Medium" xmlUrl="https://medium.com/feed/@andrewscott100"/>
       <outline type="rss" text="Esther Dyson — Medium" xmlUrl="https://medium.com/feed/@edyson"/>
-      <outline type="rss" text="Halle Tecco — Substack" xmlUrl="https://halle.substack.com/feed"/>
-      <outline type="rss" text="Zebras Unite — Substack" xmlUrl="https://zebrasunite.substack.com/feed"/>
       <outline type="rss" text="John Maeda — Substack" xmlUrl="https://maeda.substack.com/feed"/>
       <outline type="rss" text="Julie Zhuo — Medium" xmlUrl="https://medium.com/feed/@joulee"/>
-      <outline type="rss" text="Kat Zhou — Medium" xmlUrl="https://medium.com/feed/@katzhou"/>
     </outline>
 
     <outline text="Policy & Regulation" title="Policy & Regulation">
-      <outline type="rss" text="FTC — Business Blog" xmlUrl="https://www.ftc.gov/news-events/news/rss.xml"/>
       <outline type="rss" text="EU Digital Strategy — AI & Data" xmlUrl="https://digital-strategy.ec.europa.eu/en/news/rss.xml"/>
-      <outline type="rss" text="NIH — News Releases" xmlUrl="https://www.nih.gov/news-events/news-releases/rss.xml"/>
-      <outline type="rss" text="NIA — National Institute on Aging" xmlUrl="https://www.nia.nih.gov/news/rss.xml"/>
     </outline>
 
     <outline text="Research & Academic" title="Research & Academic">
-      <outline type="rss" text="WHO — News Releases" xmlUrl="https://www.who.int/feeds/entity/mediacentre/news/en/rss.xml"/>
       <outline type="rss" text="OECD — Environment & Health Focus" xmlUrl="https://oecd-environment-focus.blog/feed/"/>
       <outline type="rss" text="NBER — New Papers" xmlUrl="https://www.nber.org/rss/new.xml"/>
       <outline type="rss" text="arXiv — Human-Computer Interaction" xmlUrl="http://export.arxiv.org/rss/cs.HC"/>
-      <outline type="rss" text="SSRN — Research Papers (index)" xmlUrl="https://www.ssrn.com/en/index.cfm/rss/"/>
-      <outline type="rss" text="PubMed — Wearables Privacy" xmlUrl="https://pubmed.ncbi.nlm.nih.gov/rss/search/term=wearables%20privacy"/>
     </outline>
 
     <outline text="Influencers & Operators" title="Influencers & Operators">
-      <outline type="rss" text="Tania Boler (Elvie) — Medium" xmlUrl="https://medium.com/feed/@taniaboler"/>
       <outline type="rss" text="Ida Tin (Clue) — Medium" xmlUrl="https://medium.com/feed/@idatin"/>
       <outline type="rss" text="Peter Attia MD — Blog" xmlUrl="https://peterattiamd.com/feed/"/>
       <outline type="rss" text="Huberman Lab — Newsletter" xmlUrl="https://hubermanlab.com/feed/"/>
