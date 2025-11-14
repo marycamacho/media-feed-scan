@@ -19,6 +19,7 @@ cd media-feed-scan
 
 # Node deps
 npm install
+npm install axios
 
 # Optional: create a place for outputs
 mkdir -p data/{feeds,html,text,normalized,export,archive}
@@ -32,7 +33,7 @@ mkdir -p data/{feeds,html,text,normalized,export,archive}
 
 Generated output should **not** be in git. I keep these ignored:
 
-```
+```bash
 /data/**
 !/data/.gitkeep   # if I want empty dirs tracked
 .cache/**
@@ -60,9 +61,9 @@ Run each step directly with Node — **in this order**. After each command I’v
 
 PREREQUISITE: Activate key
 
+````bash
+export OPENAI_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ````
-source ~/.zshrc
-```
 
 1. **Build feed list from OPML**
 
@@ -105,6 +106,14 @@ node src/analyzeBatch.js
 * **Notes:** Uses `prompts/cirdia_system_prompt.txt` and `config.OPENAI_MODELS.ANALYZE`.
 
 5. **Score & select
+
+```bash
+node src/scoreAndSelect.js
+```
+* **Writes:** `data/week_full.json`, `data/week_top10.md`, `data/backlog_high.md`, `data/research_queue.md`
+
+
+## RUN ALL AT ONCE 
 
 ```bash
 bash reset.sh && \
