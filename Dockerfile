@@ -13,15 +13,15 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 # 1. Copy the rest of the application files (scripts, config, opml)
-# This runs as the root builder user, creating the root-owned data/ directory.
+# This runs as the root builder user.
 COPY . .
 
 # 2. Security: Create the unprivileged user
 RUN adduser -D scanner_user
 
-# 3. FIX EACCES: Change ownership of the data directory to the unprivileged user.
-# This runs as root and fixes the ownership of the data/ directory, enabling writing.
-RUN chown -R scanner_user:scanner_user /usr/src/app/data
+# 3. FIX EACCES: Ensure the data directory exists and is owned by the user.
+# --- This resolves the "No such file or directory" error by creating it ---
+RUN mkdir -p /usr/src/app/data && chown -R scanner_user:scanner_user /usr/src/app/data
 
 # 4. Security: Switch the context: All subsequent commands and the final CMD will run as this user.
 USER scanner_user
