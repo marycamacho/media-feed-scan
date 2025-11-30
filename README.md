@@ -1,131 +1,217 @@
-# media-feed-scan — personal README
+# **🤖 media-feed-scan: Automated Media Intelligence Pipeline**
 
-> **Purpose:** Notes for *me* so I remember exactly what this thing does and the few commands I actually run. Keep this short and practical.
+**Purpose:** A fully automated, containerized Node.js pipeline that gathers media intelligence. It scans multiple feeds, extracts full text, analyzes content with OpenAI, and securely archives processed results to a shared Nextcloud folder.
 
----
+**Project Status:** Production Ready. Deployed and running autonomously via Cron on a Linux server.
 
-## What it does
-
-Scans feeds I care about, fetches the articles, extracts readable text, and writes results into `data/` for later editing/exporting. OPML (`radar.opml`) is the source of truth for feeds.
+**Current Lookback Period:** **2 days** (configurable in `config.js`).
 
 ---
 
-## Install (once)
+## **⚙️ Project Overview and Execution Flow**
 
-```bash
-# Clone & enter
-git clone https://github.com/marycamacho/media-feed-scan.git
-cd media-feed-scan
+The workflow is orchestrated by the entry script **`src/runAll.js`**, executed inside an isolated Docker container.
 
-# Node deps
-npm install
-npm install axios
+### **Core Execution Flow**
 
-# Optional: create a place for outputs
-mkdir -p data/{feeds,html,text,normalized,export,archive}
-```
+1. **Read Feeds**  
+    Reads `radar.opml` and pulls recent articles based on the **2-day lookback**.
 
-**Config:** Edit `config.js` if needed (timeouts, concurrency, folders).
+2. **Process & Analyze**  
+    Passes data through the five core scripts:  
+    `pullFromOpml.js` → `loadWeek.js` → `fetchText.js` → `analyzeBatch.js` → `scoreAndSelect.js`
 
----
+3. **Data Output**  
+    Outputs JSON and Markdown files to `data/`.
 
-## Data & .gitignore
+4. **Secure Upload**  
+    All files in `data/` are uploaded to a time-stamped folder in the **Nextcloud shared drive** via WebDAV.
 
-Generated output should **not** be in git. I keep these ignored:
+### **Key Configuration Files**
 
-```bash
-/data/**
-!/data/.gitkeep   # if I want empty dirs tracked
-.cache/**
-/tmp/**
-/logs/**
-```
+* **`config.js`** — Main settings: `DAYS_BACK`, concurrency, model selection, etc.
 
-If I want to save old runs, I move them into `data/archive/` (also ignored).
+* **`radar.opml`** — List of media feeds.
+
+* **`Dockerfile`** — Defines a clean **Node v22 LTS** environment.
 
 ---
 
-## Reset from scratch
+## **🛠️ Local Development and Testing**
 
-```bash
-# hard reset everything this app generated
-bash reset.sh
-# (reset.sh should rm ./data/* except ./data/archive, plus any .cache folders)
-```
+### **Initial Setup**
+
+`# Clone the repository`  
+`git clone https://github.com/marycamacho/media-feed-scan.git`  
+`cd media-feed-scan`
+
+`# Install dependencies`  
+`npm install`
+
+`# Local environment variables`  
+`export OPENAI_API_KEY="sk-..."`  
+`export NEXTCLOUD_URL="https://your.nextcloud.instance/remote.php/dav/files/automation/"`  
+`export NEXTCLOUD_USER="automation"`  
+`export NEXTCLOUD_PASSWORD="APP-PASSWORD"`
+
+### **Running the Full Local Workflow**
+
+`# Run the entire analysis + upload sequence`  
+`node src/runAll.js`
+
+### **Data Cleanup**
+
+`# Clear all generated files`  
+`bash reset.sh`
 
 ---
 
-## Manual workflow (what I actually run)
+## **🐳 Production Deployment and Automation**
 
-Run each step directly with Node — **in this order**. After each command I’ve listed exact **Reads** and **Writes** so I know what files to expect.
+The application deploys to the Hetzner server via a Git-based Docker build.
 
-PREREQUISITE: Activate key
+### **Server Configuration and Secrets**
 
-````bash
-export OPENAI_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-````
+Secrets file:
 
-1. **Build feed list from OPML**
+`/etc/media-feed-scanner.env`
 
-```bash
-node src/pullFromOpml.js radar.opml
-```
+Required variables:
 
-* **Reads:** `radar.opml`
-* **Writes:** `data/week.raw.json`
-* **Notes:** Uses `config.DAYS_BACK` and `config.TIMEZONE` to keep recent items only.
+* `OPENAI_API_KEY`
 
-2. **Load the week's working set**
+* `NEXTCLOUD_USER`
 
-```bash
-node src/loadWeek.js
-```
+* `NEXTCLOUD_PASSWORD`
 
-* **Reads:** `data/week.raw.json`, `data/seen_urls.json` *(if exists)*
-* **Writes:** `data/week.json`, updates `data/seen_urls.json`
-* **Notes:** Dedupes by canonical URL; tags competitors via `config.COMPETITOR_DOMAINS`; adds topic hits from `src/topics.js`.
+* `NEXTCLOUD_URL`
 
-3. **Fetch full article text**
+### **Update & Deployment Process**
 
-```bash
-node src/fetchText.js
-```
+**On your local machine:**
 
-* **Reads:** `data/week.json`
-* **Writes:** `data/week.text.json`, `data/fetch_later.md`
-* **Notes:** Extracts readable text; sets `fulltext_quality` and honors `config.FULLTEXT_POLICY` (`required`/`preferred`/`off`).
+`git push`
 
-4. **Analyze the batch**
+**On the Hetzner server (via SSH):**
 
-```bash
-node src/analyzeBatch.js
-```
+`cd /opt/media-scan-app/media-feed-scan`  
+`git pull`  
+`docker build -t media-feed-scanner .`
 
-* **Reads:** `data/week.curated.json` *(if present, preferred)* **else** `data/week.text.json`; cache at `data/.analysis.cache.json`
-* **Writes:** `data/week.analyzed.json`, updates `data/.analysis.cache.json`
-* **Notes:** Uses `prompts/cirdia_system_prompt.txt` and `config.OPENAI_MODELS.ANALYZE`.
+### **Scheduled Run (Cron)**
 
-5. **Score & select
+**Every odd day at 7:00 AM**  
+ Cron format: `0 7 1-31/2 * *`
 
-```bash
-node src/scoreAndSelect.js
-```
-* **Writes:** `data/week_full.json`, `data/week_top10.md`, `data/backlog_high.md`, `data/research_queue.md`
+`0 7 1-31/2 * * docker run --rm --env-file /etc/media-feed-scanner.env media-feed-scanner > /dev/null 2>&1`
 
+---
 
-## RUN ALL AT ONCE 
+## **📜 Appendix: Manual Workflow and Core Details**
 
-```bash
-bash reset.sh && \
-node src/pullFromOpml.js radar.opml && \
-node src/loadWeek.js && \
-node src/fetchText.js && \
-node src/analyzeBatch.js && \
-node src/scoreAndSelect.js
-```
+### **`.gitignore` for Generated Data**
 
-## Notes to future me
+`/data/**`  
+`!/data/.gitkeep`  
+`.cache/**`  
+`/tmp/**`  
+`/logs/**`
 
-* If a step fails, re-run just that script; everything is file-based.
-* Keep **all** generated data out of git.
-* If I add a step (e.g., compose/export), append it at the end of the chain above.
+Archive old runs by moving them into `data/archive/`.
+
+---
+
+## **🧪 Manual Workflow (Debug / Single-Step Runs)**
+
+### **0\. Prerequisite: Activate Key**
+
+`export OPENAI_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"`
+
+---
+
+### **1\. Build Feed List from OPML**
+
+`node src/pullFromOpml.js radar.opml`
+
+**Reads:** `radar.opml`  
+ **Writes:** `data/week.raw.json`  
+ **Notes:** Applies `config.DAYS_BACK` and `config.TIMEZONE`.
+
+---
+
+### **2\. Load the Week's Working Set**
+
+`node src/loadWeek.js`
+
+**Reads:** `data/week.raw.json`, `data/seen_urls.json`  
+ **Writes:** `data/week.json`, updates `data/seen_urls.json`  
+ **Notes:** Dedupes by canonical URL; tags competitors via `config.COMPETITOR_DOMAINS`; adds topics from `src/topics.js`.
+
+---
+
+### **3\. Fetch Full Article Text**
+
+`node src/fetchText.js`
+
+**Reads:** `data/week.json`  
+ **Writes:** `data/week.text.json`, `data/fetch_later.md`  
+ **Notes:** Extracts readable text; sets `fulltext_quality` and honors `config.FULLTEXT_POLICY` (`required` / `preferred` / `off`).
+
+---
+
+### **4\. Analyze the Batch**
+
+`node src/analyzeBatch.js`
+
+**Reads:**
+
+* `data/week.curated.json` (if present, preferred)
+
+* else `data/week.text.json`
+
+* cache at `data/.analysis.cache.json`
+
+**Writes:**
+
+* `data/week.analyzed.json`
+
+* updates `data/.analysis.cache.json`
+
+**Notes:** Uses `prompts/cirdia_system_prompt.txt` and `config.OPENAI_MODELS.ANALYZE`.
+
+---
+
+### **5\. Score & Select**
+
+`node src/scoreAndSelect.js`
+
+**Writes:**
+
+* `data/week_full.json`
+
+* `data/week_top10.md`
+
+* `data/backlog_high.md`
+
+* `data/research_queue.md`
+
+---
+
+### **🏃 RUN EVERYTHING AT ONCE (Legacy Method)**
+
+`bash reset.sh && \`  
+`node src/pullFromOpml.js radar.opml && \`  
+`node src/loadWeek.js && \`  
+`node src/fetchText.js && \`  
+`node src/analyzeBatch.js && \`  
+`node src/scoreAndSelect.js`
+
+---
+
+## **📝 Notes to Future Me**
+
+* If a step fails, rerun just that script; everything is file-based.
+
+* Keep all generated data out of Git.
+
+* If you add a new step (e.g., compose/export), append it at the end of the chain above.
