@@ -21,7 +21,7 @@ const INPUT_OPML = 'radar.opml';
 const LOCAL_DATA_DIR = path.join(PROJECT_ROOT, 'data'); 
 
 // CORRECTED BASE PATH: Relative path to the target folder within the user's files
-const NC_REMOTE_BASE_PATH = '/Growth-Automations/feed-articles-for-posts/'; 
+const NC_REMOTE_BASE_PATH = '/Growth/Growth-Automations/feed-articles-for-posts/'; 
 
 // Generate a unique, dated folder path (e.g., /.../2025-11-29T20-44-01/)
 const RUN_DATE_TIME = new Date().toISOString().replace(/:/g, '-').slice(0, 19); 
