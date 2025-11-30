@@ -14,6 +14,9 @@ RUN npm install
 # Security: Create a new, unprivileged user named 'scanner_user' inside the container.
 RUN adduser -D scanner_user
 
+# Ensure the data directory is owned by the user who needs to write to it.
+RUN chown -R scanner_user:scanner_user /usr/src/app/data
+
 # Security: Switch the context: All subsequent commands and the final CMD will run as this user.
 USER scanner_user
 
