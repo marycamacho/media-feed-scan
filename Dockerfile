@@ -1,4 +1,5 @@
 # Dockerfile
+
 # Use the official Node.js 22 LTS (Alpine version for smaller size)
 FROM node:22-alpine
 
@@ -11,18 +12,19 @@ COPY package.json package-lock.json ./
 # Install all Node.js dependencies (including webdav)
 RUN npm install
 
-# Security: Create a new, unprivileged user named 'scanner_user' inside the container.
-RUN adduser -D scanner_user
-
-# Ensure the data directory is owned by the user who needs to write to it.
-RUN chown -R scanner_user:scanner_user /usr/src/app/data
-
-# Security: Switch the context: All subsequent commands and the final CMD will run as this user.
-USER scanner_user
-
-# Copy the rest of the application files (scripts, config, opml)
+# 1. Copy the rest of the application files (scripts, config, opml)
+# This runs as the root builder user, creating the root-owned data/ directory.
 COPY . .
 
+# 2. Security: Create the unprivileged user
+RUN adduser -D scanner_user
+
+# 3. FIX EACCES: Change ownership of the data directory to the unprivileged user.
+# This runs as root and fixes the ownership of the data/ directory, enabling writing.
+RUN chown -R scanner_user:scanner_user /usr/src/app/data
+
+# 4. Security: Switch the context: All subsequent commands and the final CMD will run as this user.
+USER scanner_user
+
 # Command to run the entry script when the container starts
-# The image will be tagged 'media-feed-scanner'
 CMD [ "node", "src/runAll.js" ]
