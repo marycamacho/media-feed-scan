@@ -12,7 +12,7 @@ export default {
   PROMPT_PATH: path.join(__dirname, "prompts", "cirdia_system_prompt.txt"),
 
   // === Feed Pull Settings ===
-  DAYS_BACK: 7,
+  DAYS_BACK: 2,
   MAX_ITEMS_PER_FEED: 25,
   CONCURRENCY: 5,             // how many feeds to fetch at once
 

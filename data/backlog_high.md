@@ -139,3 +139,24 @@
 **Why Keep:** As Cirdia navigates the intersection of technology and privacy, understanding the implications of A.I. regulations can inform its approach to data ethics and user agency.
 ---
 
+
+# Carry-Over Bank — 2025-11-29
+
+## Fast Company — “Amazon workers warn ‘warp-speed’ AI push threatens democracy and the planet” (Score 100)
+**URL:** https://www.fastcompany.com/91450846/amazon-workers-warn-warp-speed-ai-push-threatens-democracy-and-the-planet
+**Themes:** AI ethics, worker rights, environmental impact, corporate responsibility
+**Why Keep:** This article highlights the intersection of AI development and ethical considerations, particularly regarding worker agency and environmental sustainability, which aligns with Cirdia's focus on responsible tech and user empowerment.
+---
+
+## New Scientist - Health — “Upheavals to the oral microbiome in pregnancy may be behind tooth loss” (Score 86)
+**URL:** https://www.newscientist.com/article/2506108-upheavals-to-the-oral-microbiome-in-pregnancy-may-be-behind-tooth-loss/
+**Themes:** women's health, oral microbiome, pregnancy
+**Why Keep:** Understanding the relationship between pregnancy and oral health is crucial for developing targeted wellness strategies for women, particularly as they navigate midlife health challenges.
+---
+
+## Inc.com — “Study Finds One Exercise That Can Truly Improve Your Sleep” (Score 81)
+**URL:** https://www.inc.com/ava-levinson/this-exercise-will-help-you-sleep/91271659
+**Themes:** women's health, longevity, fitness, evidence-based science
+**Why Keep:** Understanding effective exercises for improving sleep can empower women in midlife to enhance their overall wellness and longevity, aligning with Cirdia's mission of functional wellness.
+---
+

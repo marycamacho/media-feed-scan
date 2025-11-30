@@ -3,13 +3,11 @@
   "version": "0.1.0",
   "type": "module",
   "description": "this goes and pulls the last 7 articles from a set of rss feeds",
-  "main": "index.js",
+  "main": "src/runAll.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin": {
-    "media-feed-scan": "./index.js"
-  },
+  "bin": "src/runAll.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -21,6 +19,7 @@
     "jsdom": "^27.0.0",
     "openai": "^6.1.0",
     "p-limit": "^7.1.1",
-    "rss-parser": "^3.13.0"
+    "rss-parser": "^3.13.0",
+    "webdav": "^5.8.0"
   }
 }

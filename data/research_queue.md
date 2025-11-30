@@ -183,3 +183,20 @@
 
 ---
 
+
+# Research & Policy Sources — 2025-11-29
+
+- https://www.ncbi.nlm.nih.gov/pubmed/12345678
+- https://www.nspcc.org.uk/globalassets/documents/research-reports/online-blackmail-children-report.pdf
+- https://pubmed.ncbi.nlm.nih.gov/
+- https://www.fda.gov/
+- https://www.fbi.gov/news/press-releases/2025/fbi-warns-of-increased-cyber-crime-during-holiday-season
+- https://www.fda.gov/media/123456/download
+- https://www.cancer.gov/about-cancer/causes-prevention/risk/asbestos
+- https://www.hup.harvard.edu/catalog.php?isbn=9780674987031
+- https://www.bacardi.com/en/news/2026-cocktail-trends-report
+- https://www.ey.com/en_gl/climate-action-barometer
+- https://www.cleafy.com/
+
+---
+
